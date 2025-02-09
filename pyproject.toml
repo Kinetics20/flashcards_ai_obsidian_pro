@@ -39,15 +39,15 @@ omit = [
 ]
 
 [tool.mypy]
-disallow_untyped_defs = true  # Wymaga typów dla wszystkich funkcji
-disallow_untyped_calls = true  # Nie pozwala na wywoływanie funkcji bez adnotacji typów
-disallow_incomplete_defs = true  # Wymaga typów dla parametrów i zwracanych wartości
-disallow_subclassing_any = true  # Zabrania dziedziczenia po nieznanych typach
-warn_return_any = true  # Ostrzega, gdy zwracany typ to Any
-warn_unused_ignores = true  # Ostrzega, gdy mypy-ignore nie jest potrzebne
-warn_redundant_casts = true  # Ostrzega przed zbędnymi rzutowaniami typu
-warn_unused_configs = true  # Ostrzega, gdy jakaś opcja konfiguracji jest nieużywana
-no_implicit_optional = true  # Nie pozwala na None, jeśli nie jest jawnie podany w Optional
+disallow_untyped_defs = true
+disallow_untyped_calls = true
+disallow_incomplete_defs = true
+disallow_subclassing_any = true
+warn_return_any = true
+warn_unused_ignores = true
+warn_redundant_casts = true
+warn_unused_configs = true
+no_implicit_optional = true
 
 [[tool.mypy.overrides]]
 module = "tests.*"
