@@ -8,4 +8,11 @@ wheels/
 
 # Virtual environments
 .venv
+48
+
 .idea
+.vscode
+
+.DS_Store
+
+.coverage
