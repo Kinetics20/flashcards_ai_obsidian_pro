@@ -1,3 +1,4 @@
+import logging
 import os
 import re
 from collections.abc import Iterable
@@ -8,12 +9,14 @@ from app.models.note_models import Note
 from app.notes_reader.notes_loader_abc import NotesLoaderABC
 from app.tools.auto_repr import auto_repr
 
+logger = logging.getLogger(__name__)
+
 
 @auto_repr
 class MarkdownNotesLoader(NotesLoaderABC):
     def __init__(self, folder_path: str, tags: Iterable[str]) -> None:
         self.folder_path = folder_path
-        self.tags: set[str]= set(tags)
+        self.tags: set[str] = set(tags)
 
     @override
     @property
@@ -44,7 +47,6 @@ class MarkdownNotesLoader(NotesLoaderABC):
 
     @staticmethod
     def find_tags(content: str) -> set[str]:
-        #
         return set(re.findall(r"#\w+", content))
 
     def check_tags(self, file_tags: set[str]) -> bool:
@@ -56,6 +58,11 @@ class MarkdownNotesLoader(NotesLoaderABC):
         for filename in os.listdir(self.folder_path):
             if filename.endswith(".md"):
                 file_list.append(filename)
+
+        if not file_list:
+            logger.error("No markdown files found")
+            raise FileNotFoundError
+
         return file_list
 
     @staticmethod
@@ -82,4 +89,4 @@ class MarkdownNotesLoader(NotesLoaderABC):
         return notes
 
     def __str__(self) -> str:
-        return f'Directory: {self.folder_path}, Tags: {'. '.join(self.tags)}.'
+        return f"Directory: {self.folder_path}, Tags: {'. '.join(self.tags)}."

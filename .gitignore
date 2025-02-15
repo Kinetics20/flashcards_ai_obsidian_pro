@@ -16,3 +16,6 @@ wheels/
 .DS_Store
 
 .coverage
+
+
+**/**/*.jsonl*

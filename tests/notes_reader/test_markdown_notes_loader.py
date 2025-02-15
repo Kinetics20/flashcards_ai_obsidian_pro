@@ -1,13 +1,14 @@
 from io import StringIO
-import os
+from unittest.mock import patch
+
 import pytest
-from unittest.mock import patch, MagicMock
+
 from app.notes_reader.notes_loader import MarkdownNotesLoader
 
 
 @pytest.fixture(scope="session")
 def folder_dir() -> str:
-    return 'obsidian_vault'
+    return "obsidian_vault"
 
 
 @pytest.fixture(scope="session")
@@ -30,24 +31,24 @@ def file_md(note_docker):
 def test_tags_are_normalized():
     tags = ["python", "#pytest", "#python", "Python", "  docker"]
 
-    nl = MarkdownNotesLoader('.', tags)
+    nl = MarkdownNotesLoader(".", tags)
 
     assert nl.tags == {"#python", "#pytest", "#docker"}
 
 
 def test_find_tags_in_multiline_note(note_docker):
-    nl = MarkdownNotesLoader('.', [])
+    nl = MarkdownNotesLoader(".", [])
     found_tags = nl.find_tags(note_docker)
     assert found_tags == {"#docker", "#pytest", "#python"}
 
 
 def test_check_tags_from_note_with_tags():
-    nl = MarkdownNotesLoader('.', ["python", "pytest"])
+    nl = MarkdownNotesLoader(".", ["python", "pytest"])
     assert nl.check_tags({"#pytest", "#docker"})
 
 
 def test_check_tags_from_note_without_matching_tags():
-    nl = MarkdownNotesLoader('.', ["python", "pytest"])
+    nl = MarkdownNotesLoader(".", ["python", "pytest"])
     assert not nl.check_tags({"#unit_tests", "#docker"})
 
 
