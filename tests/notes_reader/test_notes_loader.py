@@ -1,11 +1,12 @@
 import builtins
-from datetime import datetime
 import os
+from datetime import datetime
 from io import StringIO
 
 import pytest
 
 from app.notes_reader.notes_loader import MarkdownNotesLoader
+
 
 @pytest.fixture()
 def notes_loader():

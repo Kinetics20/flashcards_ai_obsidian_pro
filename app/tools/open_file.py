@@ -1,4 +1,7 @@
-def open_file(file_path):
+from pathlib import Path
+
+
+def open_file(file_path: str | Path) -> str:
     """
     Opens a file and returns its content as a string.
 
