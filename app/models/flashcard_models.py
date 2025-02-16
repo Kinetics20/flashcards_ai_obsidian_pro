@@ -9,7 +9,7 @@ class DifficultyEnum(str, Enum):
 
 
 class NonEmptyString(str):
-    def __new__(cls, value) -> str:
+    def __new__(cls, value: str) -> "NonEmptyString":
         if not value.strip():
             raise ValueError("String cannot be empty")
         return super().__new__(cls, value)

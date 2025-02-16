@@ -14,7 +14,7 @@ logger = logging.getLogger(__name__)
 class CardGen:
     system_prompt_path: Path = Path(__file__).parent.resolve()/ "prompts"
 
-    def __new__(cls, *args: Any, **kwargs: Any):
+    def __new__(cls, *args: Any, **kwargs: Any) -> "CardGen":
         dotenv.load_dotenv(os.path.join(os.path.dirname(__file__), '..', '..', '.env', '.env-chatgpt'))
         if os.getenv("OPENAI_API_KEY", None) is None:
             raise EnvironmentError("OPENAI_API_KEY environment variable not set")
